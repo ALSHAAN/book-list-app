@@ -1,19 +1,24 @@
+const API_URL = "http://localhost:5000/api/books";
 
-export function getBooks() {
-  const books = localStorage.getItem('books');
-  return books ? JSON.parse(books) : [];
+export async function getBooks() {
+  const response = await fetch(API_URL);
+  return await response.json();
 }
 
+export async function addBook(book) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(book)
+  });
 
-export function addBook(book) {
-  const books = getBooks();
-  books.push(book);
-  localStorage.setItem('books', JSON.stringify(books));
+  return await response.json();
 }
 
-
-export function removeBook(isbn) {
-  const books = getBooks();
-  const filteredBooks = books.filter(book => book.isbn !== isbn);
-  localStorage.setItem('books', JSON.stringify(filteredBooks));
+export async function removeBook(isbn) {
+  await fetch(`${API_URL}/${isbn}`, {
+    method: "DELETE"
+  });
 }
