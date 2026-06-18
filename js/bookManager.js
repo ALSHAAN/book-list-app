@@ -1,4 +1,4 @@
-const API_URL = "https://book-list-app-5f5r.onrender.com";
+const API_URL = "https://book-list-app-5f5r.onrender.com/api/books";
 
 export async function getBooks() {
   const response = await fetch(API_URL);
