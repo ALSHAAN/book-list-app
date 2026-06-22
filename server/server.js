@@ -4,6 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+require("./config/sqlite");
+
 const app = express();
 
 app.use(cors());
