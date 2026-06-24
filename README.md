@@ -38,22 +38,41 @@ Book List Manager is a full-stack web application that allows users to add, view
 ```text
 book-list-app/
 │
-├── index.html
-├── style.css
+├── index.html              # Signup Page (Landing Page)
+├── login.html              # User Login Page
+├── books.html              # Book List Manager Dashboard
+├── style.css               # Common Stylesheet
+├── README.md
+│
 ├── images/
+│   ├── booki2.jpg
+│   ├── signup-bg.jpg
+│   └── login-bg.jpg
 │
 ├── js/
-│   ├── app.js
-│   └── bookManager.js
+│   ├── app.js              # Frontend Application Logic
+│   └── bookManager.js      # API Communication
 │
 └── server/
     ├── server.js
     ├── package.json
+    ├── .env
+    │
+    ├── config/
+    │   └── sqlite.js
+    │
+    ├── database/
+    │   └── books.db
+    │
     ├── models/
-    │   └── Book.js
+    │   ├── Book.js
+    │   └── User.js
+    │
     ├── routes/
-    │   └── books.js
-    └── .gitignore
+    │   ├── books.js
+    │   └── auth.js
+    │
+    └── node_modules/
 ```
 
 ## API Endpoints
