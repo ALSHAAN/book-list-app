@@ -4,6 +4,8 @@ const form = document.getElementById("book-form");
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const isbnInput = document.getElementById("isbn");
+const genreInput = document.getElementById("genre");
+const statusInput = document.getElementById("status");
 const bookList = document.getElementById("book-list");
 const alertContainer = document.getElementById("alert-container");
 
@@ -28,7 +30,7 @@ async function renderBooks() {
     if (!books || books.length === 0) {
       bookList.innerHTML = `
         <tr>
-          <td colspan="4" style="text-align:center;">
+          <td colspan="6" style="text-align:center;">
             No books in collection.
           </td>
         </tr>
@@ -40,15 +42,17 @@ async function renderBooks() {
       const row = document.createElement("tr");
 
       row.innerHTML = `
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-        <td>${book.isbn}</td>
-        <td>
-          <button class="btn-delete" data-isbn="${book.isbn}">
-            Delete
-          </button>
-        </td>
-      `;
+  <td>${book.title}</td>
+  <td>${book.author}</td>
+  <td>${book.isbn}</td>
+  <td>${book.genre || "-"}</td>
+  <td>${book.status || "-"}</td>
+  <td>
+    <button class="btn-delete" data-isbn="${book.isbn}">
+      Delete
+    </button>
+  </td>
+`;
 
       bookList.appendChild(row);
     });
@@ -64,8 +68,10 @@ form.addEventListener("submit", async (e) => {
   const title = titleInput.value.trim();
   const author = authorInput.value.trim();
   const isbn = isbnInput.value.trim();
+  const genre = genreInput.value.trim();
+  const status = statusInput.value; 
 
-  if (!title || !author || !isbn) {
+  if (!title || !author || !isbn || !genre || !status) {
     showAlert("Please fill in all fields", "error");
     return;
   }
@@ -89,7 +95,9 @@ form.addEventListener("submit", async (e) => {
       title,
       author,
       isbn,
-    });
+      genre,
+      status
+});
 
     form.reset();
 
