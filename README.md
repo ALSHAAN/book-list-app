@@ -5,15 +5,18 @@ Project-link : https://book-list-app-peach.vercel.app/
 
 ## Overview
 
-Book List Manager is a full-stack web application that allows users to add, view, and delete books. The application uses a responsive frontend built with HTML, CSS, and JavaScript, a backend built with Node.js and Express.js, and MongoDB Atlas for cloud-based data storage.
+Book List Manager is a full-stack web application that allows users to register, log in, and manage their personal book collection. Users can add, view, and delete books while organizing them using Genre and Reading Status. The application features a responsive frontend built with HTML, CSS, and JavaScript, a backend developed with Node.js and Express.js, and uses MongoDB Atlas for cloud-based data storage.
 
 ## Features
 
+* User Signup and Login Authentication
 * Add new books
 * View all books
 * Delete books
-* Store book data in MongoDB Atlas
-* Fetch API for frontend-backend communication
+* Organize books using Genre
+* Track reading progress with Status (Read, Reading, Not Read)
+* Store user and book data in MongoDB Atlas
+* SQLite integration for local database support
 
 ## Tech Stack
 
@@ -32,6 +35,7 @@ Book List Manager is a full-stack web application that allows users to add, view
 
 * MongoDB Atlas
 * Mongoose
+* Sqlite
 
 ## Project Structure
 
@@ -110,5 +114,5 @@ Open `index.html` using Live Server or any local development server.
 
 * Frontend: Vercel
 * Backend: Render
-* Database: MongoDB Atlas
+* Database: MongoDB Atlas , Sqlite
 
