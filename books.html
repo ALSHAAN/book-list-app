@@ -49,6 +49,15 @@
 
       <button type="submit" class="btn">Add Book</button>
     </form>
+    <!-- Search Box -->
+   <div class="search-container">
+      <label for="search">Search Books</label>
+      <input
+         type="text"
+         id="search"
+         placeholder="Search by Title, Author, ISBN, Genre or Status..."
+      >
+   </div>
 
     <!-- Book List Table -->
     <div class="table-wrapper">
@@ -69,6 +78,14 @@
       </table>
     </div>
   </div>
+     <!-- Pagination -->
+<div class="pagination">
+  <button id="prev-btn">Previous</button>
+
+  <span id="page-info">Page 1 of 1</span>
+
+  <button id="next-btn">Next</button>
+</div>
 
   <!-- App Script (ES6 Module) -->
   <script type="module" src="js/app.js"></script>

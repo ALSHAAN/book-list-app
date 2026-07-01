@@ -1,5 +1,7 @@
 import { getBooks, addBook, removeBook } from "./bookManager.js";
 
+
+const searchInput = document.getElementById("search");
 const form = document.getElementById("book-form");
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
@@ -8,6 +10,12 @@ const genreInput = document.getElementById("genre");
 const statusInput = document.getElementById("status");
 const bookList = document.getElementById("book-list");
 const alertContainer = document.getElementById("alert-container");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+const pageInfo = document.getElementById("page-info");
+
+let currentPage = 1;
+const booksPerPage = 5;
 
 function showAlert(message, type) {
   alertContainer.innerHTML = `
@@ -21,13 +29,28 @@ function showAlert(message, type) {
   }, 3000);
 }
 
-async function renderBooks() {
+async function renderBooks(searchText = "") {
   try {
     const books = await getBooks();
+    const filteredBooks = books.filter((book) => {
+    const search = searchText.toLowerCase();
+
+  return (
+    book.title.toLowerCase().includes(search) ||
+    book.author.toLowerCase().includes(search) ||
+    book.isbn.toLowerCase().includes(search) ||
+    book.genre.toLowerCase().includes(search) ||
+    book.status.toLowerCase().includes(search)
+  );
+});
+   const start = (currentPage - 1) * booksPerPage;
+   const end = start + booksPerPage;
+
+   const paginatedBooks = filteredBooks.slice(start, end);
 
     bookList.innerHTML = "";
 
-    if (!books || books.length === 0) {
+    if (filteredBooks.length === 0) {
       bookList.innerHTML = `
         <tr>
           <td colspan="6" style="text-align:center;">
@@ -38,7 +61,7 @@ async function renderBooks() {
       return;
     }
 
-    books.forEach((book) => {
+    paginatedBooks.forEach((book) => {
       const row = document.createElement("tr");
 
       row.innerHTML = `
@@ -56,10 +79,20 @@ async function renderBooks() {
 
       bookList.appendChild(row);
     });
+    const totalPages = Math.max(1, Math.ceil(filteredBooks.length / booksPerPage));
+
+    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+     prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
   } catch (error) {
     console.error("Render Error:", error);
     showAlert("Failed to load books", "error");
   }
+  
+
+
+
 }
 
 form.addEventListener("submit", async (e) => {
@@ -141,3 +174,32 @@ document.addEventListener(
     await renderBooks();
   }
 );
+
+
+prevBtn.addEventListener("click", () => {
+
+    if(currentPage > 1){
+
+        currentPage--;
+
+        renderBooks(searchInput.value);
+
+    }
+
+});
+
+nextBtn.addEventListener("click", () => {
+
+    currentPage++;
+
+    renderBooks(searchInput.value);
+
+});
+
+searchInput.addEventListener("input", () => {
+
+    currentPage = 1;
+
+    renderBooks(searchInput.value);
+
+});
