@@ -51,15 +51,22 @@
       });
 
       const data = await response.json();
+      console.log(data);
 
-      if (response.ok) {
-        alert("Login Successful");
-        localStorage.setItem("user", email);
+if (response.ok) {
 
-        window.location.href = "books.html";
-      } else {
-        alert(data.message);
-      }
+  localStorage.setItem("userId", data.user._id);
+  localStorage.setItem("userName", data.user.name);
+
+  alert("Login Successful");
+
+  window.location.href = "books.html";
+
+} else {
+
+  alert(data.message);
+
+}
     });
   </script>
 </body>

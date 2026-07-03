@@ -1,7 +1,10 @@
 const API_URL = "https://book-list-app-5f5r.onrender.com/api/books";
 
 export async function getBooks() {
-  const response = await fetch(API_URL);
+  const userId = localStorage.getItem("userId");
+
+  const response = await fetch(`${API_URL}?userId=${userId}`);
+
   return await response.json();
 }
 
@@ -18,7 +21,9 @@ export async function addBook(book) {
 }
 
 export async function removeBook(isbn) {
-  await fetch(`${API_URL}/${isbn}`, {
+  const userId = localStorage.getItem("userId");
+
+  await fetch(`${API_URL}/${isbn}?userId=${userId}`, {
     method: "DELETE"
   });
 }

@@ -1,5 +1,12 @@
 import { getBooks, addBook, removeBook } from "./bookManager.js";
 
+const userId = localStorage.getItem("userId");
+
+if (!userId) {
+    window.location.href = "login.html";
+}
+
+
 
 const searchInput = document.getElementById("search");
 const form = document.getElementById("book-form");
@@ -14,8 +21,14 @@ const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
 const pageInfo = document.getElementById("page-info");
 
+const logoutBtn = document.getElementById("logout-btn");
+const totalBooks = document.getElementById("total-books");
+
 let currentPage = 1;
 const booksPerPage = 5;
+
+let debounceTimer;
+let allBooks = [];
 
 function showAlert(message, type) {
   alertContainer.innerHTML = `
@@ -28,10 +41,12 @@ function showAlert(message, type) {
     alertContainer.innerHTML = "";
   }, 3000);
 }
-
+async function loadBooks() {
+    allBooks = await getBooks();
+}
 async function renderBooks(searchText = "") {
   try {
-    const books = await getBooks();
+    const books = allBooks;
     const filteredBooks = books.filter((book) => {
     const search = searchText.toLowerCase();
 
@@ -43,6 +58,9 @@ async function renderBooks(searchText = "") {
     book.status.toLowerCase().includes(search)
   );
 });
+totalBooks.textContent =
+`Total Books : ${filteredBooks.length}`;
+
    const start = (currentPage - 1) * booksPerPage;
    const end = start + booksPerPage;
 
@@ -109,6 +127,16 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  if (isbn.length < 6) {
+    showAlert("ISBN must be at least 6 characters.", "error");
+    return;
+}
+
+  if (title.length < 2) {
+  showAlert("Book title must contain at least 2 characters.", "error");
+  return;
+}
+
   try {
     const books = await getBooks();
 
@@ -129,7 +157,8 @@ form.addEventListener("submit", async (e) => {
       author,
       isbn,
       genre,
-      status
+      status,
+      userId: localStorage.getItem("userId")
 });
 
     form.reset();
@@ -139,7 +168,9 @@ form.addEventListener("submit", async (e) => {
       "success"
     );
 
-    await renderBooks();
+    await loadBooks();
+
+    renderBooks();
   } catch (error) {
     console.error("Add Error:", error);
     showAlert("Failed to add book", "error");
@@ -154,6 +185,10 @@ bookList.addEventListener("click", async (e) => {
   try {
     const isbn = e.target.dataset.isbn;
 
+    if (!confirm("Are you sure you want to delete this book?")) {
+    return;
+}
+
     await removeBook(isbn);
 
     showAlert(
@@ -161,20 +196,21 @@ bookList.addEventListener("click", async (e) => {
       "success"
     );
 
-    await renderBooks();
+    await loadBooks();
+    renderBooks();
   } catch (error) {
     console.error("Delete Error:", error);
     showAlert("Failed to delete book", "error");
   }
 });
 
-document.addEventListener(
-  "DOMContentLoaded",
-  async () => {
-    await renderBooks();
-  }
-);
+document.addEventListener("DOMContentLoaded", async () => {
 
+    await loadBooks();
+
+    renderBooks();
+
+});
 
 prevBtn.addEventListener("click", () => {
 
@@ -198,8 +234,24 @@ nextBtn.addEventListener("click", () => {
 
 searchInput.addEventListener("input", () => {
 
-    currentPage = 1;
+    clearTimeout(debounceTimer);
 
-    renderBooks(searchInput.value);
+    debounceTimer = setTimeout(() => {
+
+        currentPage = 1;
+
+        renderBooks(searchInput.value);
+
+    }, 300);
+
+});
+
+
+logoutBtn.addEventListener("click", () => {
+
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+
+    window.location.href = "login.html";
 
 });

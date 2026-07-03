@@ -5,7 +5,11 @@ const bookSchema = new mongoose.Schema({
   author: String,
   isbn: String,
   genre: String,
-  status: String
+  status: String,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 module.exports = mongoose.model("Book", bookSchema);

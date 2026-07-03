@@ -313,3 +313,9 @@ tr:hover {
 #page-info{
     font-weight:bold;
 }
+
+.book-summary{
+    margin:20px 0;
+    font-weight:bold;
+    font-size:20px;
+}
