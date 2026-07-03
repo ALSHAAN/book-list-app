@@ -6,8 +6,6 @@ if (!userId) {
     window.location.href = "login.html";
 }
 
-
-
 const searchInput = document.getElementById("search");
 const form = document.getElementById("book-form");
 const titleInput = document.getElementById("title");
@@ -58,6 +56,7 @@ async function renderBooks(searchText = "") {
     book.status.toLowerCase().includes(search)
   );
 });
+
 totalBooks.textContent =
 `Total Books : ${filteredBooks.length}`;
 
@@ -107,10 +106,6 @@ totalBooks.textContent =
     console.error("Render Error:", error);
     showAlert("Failed to load books", "error");
   }
-  
-
-
-
 }
 
 form.addEventListener("submit", async (e) => {
@@ -134,6 +129,10 @@ form.addEventListener("submit", async (e) => {
 
   if (title.length < 2) {
   showAlert("Book title must contain at least 2 characters.", "error");
+  return;
+}
+  if (!/^[A-Za-z\s.]+$/.test(author)) {
+  showAlert("Author name can contain only letters, spaces and periods.", "error");
   return;
 }
 
@@ -227,7 +226,6 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
 
     currentPage++;
-
     renderBooks(searchInput.value);
 
 });

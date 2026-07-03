@@ -23,9 +23,9 @@ router.post("/", async (req, res) => {
   }
 
   // Validation 2: ISBN length
-  if (isbn.length < 10) {
+  if (isbn.length < 6) {
     return res.status(400).json({
-      message: "ISBN must be at least 10 characters."
+      message: "ISBN must be at least 6 characters."
     });
   }
 
