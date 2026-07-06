@@ -58,16 +58,41 @@ if (response.ok) {
   localStorage.setItem("userId", data.user._id);
   localStorage.setItem("userName", data.user.name);
 
-  alert("Login Successful");
+showToast("Login Successful!");
 
-  window.location.href = "books.html";
+setTimeout(() => {
+
+    window.location.href = "books.html";
+
+}, 1500);
 
 } else {
 
-  alert(data.message);
+  showToast(data.message);
 
 }
+
     });
+    function showToast(message) {
+
+    const toast = document.getElementById("toast");
+    const text = document.getElementById("toast-message");
+
+    text.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 1200);
+
+}
   </script>
+  <div id="toast" class="toast">
+    <span>✔</span>
+    <span id="toast-message"></span>
+</div>
 </body>
 </html>

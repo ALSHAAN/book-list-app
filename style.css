@@ -666,3 +666,55 @@ text-align:right;
     background:#ef4444;
     color:white;
 }
+
+.toast{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    background:#22c55e;
+
+    color:white;
+
+    padding:16px 24px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+    opacity:0;
+
+    transform:translateX(120px);
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+.toast span:first-child{
+
+    font-size:22px;
+
+}
