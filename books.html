@@ -5,12 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A simple and clean Book List Manager web application built with HTML, CSS, and Vanilla JavaScript.">
   <title>Book List Manager</title>
+  <link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Book List Manager</h1>
+      <h3 class="logo-title">
+        <i class="fas fa-book-open"></i>
+        Book List Manager
+    </h3>
 
         <button id="logout-btn" class="logout-btn">
     Logout
@@ -19,6 +24,7 @@
 
     <!-- Success/Error Messages -->
     <div id="alert-container"></div>
+    
 
     <!-- Add Book Form -->
     <form id="book-form">
@@ -62,10 +68,127 @@
          placeholder="Search by Title, Author, ISBN, Genre or Status..."
       >
    </div>
+
+   <div class="dashboard">
+
+    <div class="card total">
+        <div class="icon">📚</div>
+        <h3>Total Books</h3>
+        <h2 id="total-books">0</h2>
+        <p>All Books</p>
+    </div>
+
+    <div class="card read">
+        <div class="icon green">
+    <i class="fas fa-check"></i></div>
+        <h3>Books Read</h3>
+        <h2 id="read-books">0</h2>
+        <p>Completed</p>
+    </div>
+
+    <div class="card reading">
+        <div class="icon">📖</div>
+        <h3>Currently Reading</h3>
+        <h2 id="reading-books">0</h2>
+        <p>In Progress</p>
+    </div>
+
+    <div class="card notread">
+        <div class="icon red">
+    <i class="fas fa-bookmark"></i>
+</div>
+        <h3>Not Read</h3>
+        <h2 id="notread-books">0</h2>
+        <p>Pending</p>
+    </div>
+
+    <!-- Progress Card -->
+
+    <div class="progress-card">
+
+        <h3>📈 Reading Progress</h3>
+
+        <div class="progress-content">
+
+            <div class="circle">
+
+                <svg width="160" height="160">
+
+                    <circle
+                        class="bg"
+                        cx="75"
+                        cy="75"
+                        r="58">
+                    </circle>
+
+                    <circle
+                        id="progress-circle"
+                        class="progress"
+                        cx="75"
+                        cy="75"
+                        r="58">
+                    </circle>
+
+                </svg>
+
+                <div class="percent">
+
+                    <h2 id="progress-percent">0%</h2>
+
+                    <p>Completed</p>
+
+                </div>
+
+            </div>
+
+            <div class="progress-details">
+
+              <div class="progress-item">
+
+               <span class="label">
+                  🟢 Books Read
+                </span>
+
+                <span id="progress-read"></span>
+
+              </div>
+
+              <div class="progress-item">
+
+                <span class="label">
+                  🟡 In Progress
+                </span>
+
+                <span id="progress-reading"></span>
+
+              </div>
+
+              <div class="progress-item">
+
+                <span class="label">
+                  🔴 Not Read
+                </span>
+
+                <span id="progress-notread"></span>
+
+              </div>
+
+            </div>
+
+        </div>
+
+        <div class="progress-footer">
+
+            Keep going! You're doing great ✨
+        
+            
+        </div>
+
+    </div>
+
+</div>
    
-   <div class="book-summary">
-    <h3 id="total-books">Total Books : 0</h3>
-   </div>
+
 
     <!-- Book List Table -->
     <div class="table-wrapper">

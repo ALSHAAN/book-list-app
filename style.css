@@ -50,10 +50,11 @@ header {
   margin-bottom: 2.5rem;
 }
 
-header h1 {
+header h3 {
   font-size: 3rem;
   color: var(--primary-color);
 }
+
 
 /* Alerts */
 .alert {
@@ -164,7 +165,7 @@ td {
 }
 
 th {
-  background-color: #f9fafb;
+  background-color: #ede9fe; ;
   color: var(--text-muted);
   font-weight: 600;
 }
@@ -339,4 +340,329 @@ header {
 
 .logout-btn:hover {
     background: #ca3858;
+}
+
+/* ===========================
+   DASHBOARD
+=========================== */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:180px 180px 180px 180px 380px;
+    gap:18px;
+    align-items:start;
+    margin:30px 0;
+}
+
+/* Small Cards */
+
+.card{
+    background:#fff;
+    border-radius:18px;
+    padding:18px;
+    height:260px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    text-align:center;
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+}
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card .icon{
+
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-size:24px;
+    margin-bottom:15px;
+
+}
+
+.total .icon{
+
+    background:#4f46e5;
+    color:white;
+
+}
+
+.read .icon{
+
+    background:#16a34a;
+    color:white;
+
+}
+
+.reading .icon{
+
+    background:#f59e0b;
+    color:white;
+
+}
+
+.notread .icon{
+
+    background:#ef4444;
+    color:white;
+
+}
+
+.card h3{
+
+    font-size:16px;
+    margin-top:8px;
+
+}
+
+.card h2{
+
+    font-size:32px;
+    margin:6px 0;
+
+}
+
+.card p{
+
+    color:#777;
+
+}
+
+/* Bottom Wave */
+
+.card::after{
+
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:50px;
+    background:rgba(79,70,229,.08);
+    border-radius:50% 50% 0 0;
+
+}
+
+.read::after{
+
+    background:rgba(22,163,74,.08);
+
+}
+
+.reading::after{
+
+    background:rgba(245,158,11,.08);
+
+}
+
+.notread::after{
+
+    background:rgba(239,68,68,.08);
+
+}
+
+/* ===========================
+   Progress Card
+=========================== */
+
+.progress-card{
+
+    background:white;
+    min-width:380px;
+    min-height:260px;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.progress-card h3{
+
+    margin-bottom:20px;
+    color:#4338ca;
+
+}
+
+.progress-content{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    gap:20px;
+
+}
+
+/* Circle */
+
+.circle{
+
+    position:relative;
+    width:180px;
+    height:180px;
+
+}
+
+.circle svg{
+
+    transform:rotate(-90deg);
+
+}
+
+.circle circle{
+
+    fill:none;
+    stroke-width:12;
+
+}
+
+.bg{
+
+    stroke:#eeeeee;
+
+}
+
+.progress{
+
+    stroke:#22c55e;
+    stroke-linecap:round;
+    stroke-dasharray:377;
+    stroke-dashoffset:377;
+    transition:1s;
+
+}
+
+.percent{
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.percent h2{
+
+    font-size:26px;
+    margin-left: 7px;
+    margin:0;
+
+}
+
+.percent p{
+
+    margin-top:2px;
+    margin-right: 14px;
+    font-size:14px;
+
+}
+
+/* Right Side */
+
+.progress-details{
+    margin-right: 1px;
+    width:160px;
+
+}
+
+.progress-details div{
+
+    display:flex;
+    justify-content:space-between;
+    margin:16px 0;
+    font-weight:600;
+
+}
+
+/* Footer */
+
+.progress-footer{
+
+    margin-top:20px;
+    text-align:center;
+    background:#f5f3ff;
+    padding:12px;
+    border-radius:10px;
+    color:#4338ca;
+    font-weight:bold;
+
+}
+.progress-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin:18px 0;
+
+font-weight:600;
+
+}
+
+.progress-item span:last-child{
+
+min-width:80px;
+
+text-align:right;
+
+}
+
+.logo-title{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    color:#4f46e5;
+
+    font-size:46px;
+
+    font-weight:700;
+
+}
+
+.logo-title i{
+
+    width:55px;
+    height:55px;
+
+    background:#4f46e5;
+
+    color:white;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:30px;
+
+    box-shadow:0 6px 18px rgba(79,70,229,.35);
+
+}
+
+.green{
+    background:#22c55e;
+    color:white;
+}
+.red{
+    background:#ef4444;
+    color:white;
 }

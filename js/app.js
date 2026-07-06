@@ -21,6 +21,18 @@ const pageInfo = document.getElementById("page-info");
 
 const logoutBtn = document.getElementById("logout-btn");
 const totalBooks = document.getElementById("total-books");
+const readBooks = document.getElementById("read-books");
+const readingBooks = document.getElementById("reading-books");
+const notReadBooks = document.getElementById("notread-books");
+const progressCircle = document.getElementById("progress-circle");
+
+const progressPercent = document.getElementById("progress-percent");
+
+const progressRead = document.getElementById("progress-read");
+
+const progressReading = document.getElementById("progress-reading");
+
+const progressNotRead = document.getElementById("progress-notread");
 
 let currentPage = 1;
 const booksPerPage = 5;
@@ -45,6 +57,15 @@ async function loadBooks() {
 async function renderBooks(searchText = "") {
   try {
     const books = allBooks;
+
+    const read = books.filter(book => book.status === "Read").length;
+
+   const reading = books.filter(book => book.status === "Reading").length;
+
+   const notRead = books.filter(book => book.status === "Not Read").length;
+
+    const total = books.length;
+
     const filteredBooks = books.filter((book) => {
     const search = searchText.toLowerCase();
 
@@ -57,8 +78,47 @@ async function renderBooks(searchText = "") {
   );
 });
 
-totalBooks.textContent =
-`Total Books : ${filteredBooks.length}`;
+   totalBooks.textContent = total;
+
+readBooks.textContent = read;
+
+readingBooks.textContent = reading;
+
+notReadBooks.textContent = notRead;
+
+  let completedPercent = 0;
+
+if (total > 0) {
+    completedPercent = Math.round((read / total) * 100);
+}
+
+progressPercent.textContent = completedPercent + "%";
+
+const readingPercent =
+    total > 0 ? Math.round((reading / total) * 100) : 0;
+
+const notReadPercent =
+    total > 0 ? Math.round((notRead / total) * 100) : 0;
+
+progressRead.textContent =
+    `${read} (${completedPercent}%)`;
+
+progressReading.textContent =
+    `${reading} (${readingPercent}%)`;
+
+progressNotRead.textContent =
+    `${notRead} (${notReadPercent}%)`;
+
+    const radius = 58;
+const circumference = 2 * Math.PI * radius;
+
+progressCircle.style.strokeDasharray = circumference;
+
+const offset =
+    circumference -
+    (completedPercent / 100) * circumference;
+
+progressCircle.style.strokeDashoffset = offset;
 
    const start = (currentPage - 1) * booksPerPage;
    const end = start + booksPerPage;
