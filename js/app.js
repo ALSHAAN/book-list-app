@@ -109,16 +109,22 @@ progressReading.textContent =
 progressNotRead.textContent =
     `${notRead} (${notReadPercent}%)`;
 
-    const radius = 58;
-const circumference = 2 * Math.PI * radius;
+const greenEnd = completedPercent;
+const yellowEnd = completedPercent + readingPercent;
 
-progressCircle.style.strokeDasharray = circumference;
+progressCircle.style.background = `
+conic-gradient(
+from -90deg,
 
-const offset =
-    circumference -
-    (completedPercent / 100) * circumference;
+#22c55e 0% ${greenEnd}%,
+white ${greenEnd}% ${greenEnd + 1}%,
 
-progressCircle.style.strokeDashoffset = offset;
+#facc15 ${greenEnd + 1}% ${yellowEnd}%,
+white ${yellowEnd}% ${yellowEnd + 1}%,
+
+#ef4444 ${yellowEnd + 1}% 100%
+)
+`;
 
    const start = (currentPage - 1) * booksPerPage;
    const end = start + booksPerPage;
