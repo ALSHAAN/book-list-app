@@ -23,7 +23,7 @@
 }
 
 body {
-  font-family: system-ui, Roboto, sans-serif;
+  font-family: 'Poppin', sans-serif;
   background-image: url("images/booki2.jpg");
   background-size: cover;
   background-position: center;
@@ -36,7 +36,7 @@ body {
 
 /* Container */
 .container {
-  max-width: 1250px;
+  max-width: 1450px;
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
@@ -348,10 +348,12 @@ header {
 
 .dashboard{
     display:grid;
-    grid-template-columns:180px 180px 180px 180px 380px;
+    grid-template-columns:repeat(4, 1fr) 2fr;
     gap:18px;
     align-items:start;
     margin:30px 0;
+
+    
 }
 
 /* Small Cards */
@@ -564,7 +566,7 @@ header {
 .percent p{
 
     margin-top:2px;
-    margin-right: 14px;
+    margin-right: 26px;
     font-size:14px;
 
 }
@@ -620,6 +622,7 @@ min-width:80px;
 text-align:right;
 
 }
+
 
 .logo-title{
 
@@ -716,5 +719,120 @@ text-align:right;
 .toast span:first-child{
 
     font-size:22px;
+
+}
+
+.input-group{
+
+    position:relative;
+
+    width:100%;
+
+}
+
+.input-group i{
+
+    position:absolute;
+
+    left:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#5b5bd6;
+
+    font-size:15px;
+
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:12px 12px 12px 42px;
+
+}
+
+.book-title {
+    font-weight: 700;
+}
+
+.genre-badge,
+.status-badge{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:8px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.genre-badge.fiction{
+
+    background:#ede9fe;
+    color:#5b21b6;
+
+}
+
+.genre-badge.drama{
+
+    background:#fee2e2;
+    color:#dc2626;
+
+}
+
+.genre-badge.action{
+
+    background:#dbeafe;
+    color:#2563eb;
+
+}
+
+.genre-badge.comedy{
+
+    background:#fef3c7;
+    color:#d97706;
+
+}
+
+.genre-badge.fantasy{
+
+    background:#dcfce7;
+    color:#15803d;
+
+}
+
+.genre-badge.sci-fi{
+
+    background:#cffafe;
+    color:#0f766e;
+
+}
+
+
+.status-badge.read{
+
+    background:#dcfce7;
+    color:#15803d;
+
+}
+
+.status-badge.reading{
+
+    background:#fef3c7;
+    color:#d97706;
+
+}
+
+.status-badge.not-read{
+
+    background:#fee2e2;
+    color:#dc2626;
 
 }

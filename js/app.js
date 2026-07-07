@@ -142,11 +142,20 @@ progressCircle.style.strokeDashoffset = offset;
       const row = document.createElement("tr");
 
       row.innerHTML = `
-  <td>${book.title}</td>
+  <td class="book-title">${book.title}</td>
   <td>${book.author}</td>
   <td>${book.isbn}</td>
-  <td>${book.genre || "-"}</td>
-  <td>${book.status || "-"}</td>
+ <td>
+    <span class="genre-badge ${book.genre.toLowerCase().replace(/\s+/g, '-')}">
+        ${book.genre}
+    </span>
+</td>
+
+<td>
+    <span class="status-badge ${book.status.toLowerCase().replace(/\s+/g, '-')}">
+        ${book.status}
+    </span>
+</td>
   <td>
     <button class="btn-delete" data-isbn="${book.isbn}">
       Delete
