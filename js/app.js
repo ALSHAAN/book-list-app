@@ -231,8 +231,7 @@ form.addEventListener("submit", async (e) => {
       author,
       isbn,
       genre,
-      status,
-      userId: localStorage.getItem("userId")
+      status
 });
 
     form.reset();
@@ -322,6 +321,7 @@ searchInput.addEventListener("input", () => {
 
 logoutBtn.addEventListener("click", () => {
 
+    localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
 

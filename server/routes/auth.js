@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // SIGNUP
 router.post("/signup", async (req, res) => {
@@ -59,13 +60,26 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    res.json({
-  message: "Login successful",
-  user: {
-    _id: user._id,
-    name: user.name,
-    email: user.email
-  }
+    const token = jwt.sign(
+    {
+        userId: user._id
+    },
+    process.env.JWT_SECRET,
+    {
+        expiresIn: "1d"
+    }
+);
+
+res.json({
+    message: "Login successful",
+
+    token,
+
+    user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email
+    }
 });
 
   } catch (error) {

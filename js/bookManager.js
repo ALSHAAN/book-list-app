@@ -3,9 +3,13 @@ const API_URL = "https://book-list-app-5f5r.onrender.com/api/books";
 
 
 export async function getBooks() {
-  const userId = localStorage.getItem("userId");
+  
 
-  const response = await fetch(`${API_URL}?userId=${userId}`);
+  const response = await fetch(API_URL, {
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+});
 
   return await response.json();
 }
@@ -14,18 +18,20 @@ export async function addBook(book) {
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`
     },
     body: JSON.stringify(book)
   });
-
   return await response.json();
 }
 
 export async function removeBook(isbn) {
-  const userId = localStorage.getItem("userId");
-
-  await fetch(`${API_URL}/${isbn}?userId=${userId}`, {
-    method: "DELETE"
+  
+  await fetch(`${API_URL}/${isbn}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
   });
 }

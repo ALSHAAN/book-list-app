@@ -1,19 +1,26 @@
 const router = require("express").Router();
 const Book = require("../models/Book");
 const db = require("../config/sqlite");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
-  const books = await Book.find({
-    userId: req.query.userId
-});
-  res.json(books);
+router.get("/", auth, async (req, res) => {
+
+    const books = await Book.find({
+
+        userId: req.user.userId
+
+    });
+
+    res.json(books);
+
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
 
   console.log("Request Body:", req.body);
 
-  const { title, author, isbn, genre, status, userId } = req.body;
+  const { title, author, isbn, genre, status } = req.body;
+  const userId = req.user.userId;
 
   // Validation 1: Required fields
   if (!title || !author || !isbn || !genre || !status || !userId) {
@@ -67,11 +74,11 @@ const book = await Book.create({
   res.json(book);
 });
 
-router.delete("/:isbn", async (req, res) => {
+router.delete("/:isbn", auth, async (req, res) => {
 
   await Book.deleteOne({
       isbn: req.params.isbn,
-      userId: req.query.userId
+      userId: req.user.userId
   });
 
   res.json({
