@@ -3,15 +3,18 @@ const API_URL = "https://book-list-app-5f5r.onrender.com/api/books";
 
 
 export async function getBooks() {
-  
 
-  const response = await fetch(API_URL, {
-    headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-    }
-});
+    const response = await fetch(API_URL, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    });
 
-  return await response.json();
+    const data = await response.json();
+
+    console.log(data);
+
+    return data;
 }
 
 export async function addBook(book) {
