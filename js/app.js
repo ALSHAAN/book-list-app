@@ -34,6 +34,12 @@ const progressReading = document.getElementById("progress-reading");
 
 const progressNotRead = document.getElementById("progress-notread");
 
+const confirmBox = document.getElementById("confirmBox");
+
+const yesBtn = document.getElementById("yesBtn");
+
+const noBtn = document.getElementById("noBtn");
+
 let currentPage = 1;
 const booksPerPage = 5;
 
@@ -226,13 +232,27 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
+confirmBox.style.display = "flex";
+yesBtn.onclick = async () => {
+    confirmBox.style.display = "none";
     await addBook({
-      title,
-      author,
-      isbn,
-      genre,
-      status
-});
+        title,
+        author,
+        isbn,
+        genre,
+        status
+    });
+    form.reset();
+    showAlert(
+        "Book added successfully!",
+        "success"
+    );
+    await loadBooks();
+    renderBooks();
+};
+noBtn.onclick = () => {
+    confirmBox.style.display = "none";
+};
 
     form.reset();
 

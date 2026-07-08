@@ -285,11 +285,21 @@ tr:hover {
 /* Pagination */
 
 .pagination{
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     gap:20px;
-    margin-top:25px;
+
+    padding:20px;
+
+    border-top:1px solid #e5e7eb;
+
+    background:#fff;
+
 }
 
 .pagination button{
@@ -313,6 +323,50 @@ tr:hover {
 
 #page-info{
     font-weight:bold;
+}
+.page-btn{
+
+    background:#4f46e5;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.page-btn:hover{
+
+    background:#4338ca;
+
+}
+
+.page-btn:disabled{
+
+    background:#d1d5db;
+
+    cursor:not-allowed;
+
+}
+#page-info{
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#374151;
+
 }
 
 .book-summary{
@@ -850,5 +904,109 @@ text-align:right;
 
     background:#fee2e2;
     color:#dc2626;
+
+}
+
+/* Login Loader */
+.loader-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+}
+
+.loader{
+    width:55px;
+    height:55px;
+    border:6px solid #e5e7eb;
+    border-top:6px solid #4f46e5;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+.loader-container p{
+    margin-top:15px;
+    font-size:18px;
+    font-weight:600;
+    color:#4f46e5;
+}
+
+@keyframes spin{
+
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.confirm-box{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.4);
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.confirm-content{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+.confirm-content button{
+
+    margin:10px;
+
+    padding:10px 20px;
+
+    border:none;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+}
+
+#yesBtn{
+
+    background:#4f46e5;
+
+    color:white;
+
+}
+
+#noBtn{
+
+    background:#ddd;
 
 }
