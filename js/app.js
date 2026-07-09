@@ -256,11 +256,7 @@ noBtn.onclick = () => {
 
     form.reset();
 
-    showAlert(
-      "Book added successfully!",
-      "success"
-    );
-
+ 
     await loadBooks();
 
     renderBooks();
